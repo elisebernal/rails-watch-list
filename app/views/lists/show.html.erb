@@ -1,0 +1,30 @@
+<br>
+<h2><%= @list.name %></h2>
+
+<ul>
+  <% @list.bookmarks.each do |bookmark| %>
+    <li><%= bookmark.movie.title %></li>
+    <li><%= bookmark.movie.overview %></li>
+    <li><%= bookmark.movie.rating %></li>
+  <% end %>
+</ul>
+<br>
+<%= link_to lists_path do %>
+  <i class="fa fa-history"></i> Back to list
+<% end %>
+
+
+<h2><%= @list.name %></h2>
+<%= link_to 'Add a movie', new_list_bookmark_path(@list) %>
+
+<% @list.bookmarks.each do |item| %>
+    <img src="https://image.tmdb.org/t/p/original<%=item.movie.poster_url%>">
+    <p> <%=item.movie.poster_url%> </p>
+    <p> <%= item.movie.title %></p>
+    <p> <%= item.movie.overview %></p>
+    <p> <%= item.comment %></p>
+    <%= link_to "Delete",
+            bookmark_path(item),
+            method: :delete,
+            data: { confirm: "Are you sure?" } %>
+  <% end %>
